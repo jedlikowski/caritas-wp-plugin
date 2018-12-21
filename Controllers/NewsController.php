@@ -12,6 +12,7 @@ class NewsController extends Controller
 
     public function index()
     {
+        global $caritas_app_plugin;
         $query = [
             'page' => 1,
         ];
@@ -19,8 +20,14 @@ class NewsController extends Controller
             $query['page'] = $_GET['page'];
         }
         $NewsList = new NewsList();
+        $division = $caritas_app_plugin->getSelectedDivision();
+        if (!$division) {
+            return $this->renderTemplate('news', [
+                'NewsList' => $NewsList,
+            ]);
+        }
 
-        $res = $this->api->get('/divisions/14/news', $query);
+        $res = $this->api->get('/divisions/' . $division . '/news', $query);
         if (!empty($res)) {
             $NewsList = new NewsList($res);
         }

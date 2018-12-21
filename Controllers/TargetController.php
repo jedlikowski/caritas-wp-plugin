@@ -14,8 +14,11 @@ class TargetController extends Controller
     public function index()
     {
         $TargetsList = new TargetsList();
+        global $caritas_app_plugin;
 
-        $res = $this->api->get('/targets', ['division_id' => 8]);
+        $res = $this->api->get('/targets', [
+            'division_id' => $caritas_app_plugin->getSelectedDivision(),
+        ]);
         if (!empty($res)) {
             $TargetsList = new TargetsList($res);
         }
