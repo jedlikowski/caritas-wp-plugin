@@ -3,13 +3,14 @@
 namespace CaritasApp\Controllers;
 
 use CaritasApp\Controllers\Controller;
+use CaritasApp\Core\Router;
 use CaritasApp\Models\Target;
 use CaritasApp\Models\TargetPaymentMethods;
 use CaritasApp\Models\TargetsList;
 
 class TargetController extends Controller
 {
-    const BASE_PATH = '/cele';
+    const BASE_PATH = Router::TARGETS_PATH;
 
     public function index()
     {
@@ -74,7 +75,6 @@ class TargetController extends Controller
             if ($method->type !== 'bank-transfer') {
                 continue;
             }
-
             $paymentUrl = $method->url;
         }
 

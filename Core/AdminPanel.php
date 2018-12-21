@@ -9,7 +9,7 @@ class AdminPanel
 {
     private $main_page_key = 'aplikacja-caritas';
     private $settings_page_key = 'ustawienia-aplikacji-caritas';
-    private $iframe_url = 'https://aplikacjacaritas.pl/cms';
+    private $iframe_url = Api::BASE_PATH . '/cms';
 
     public function __construct()
     {
@@ -91,5 +91,15 @@ class AdminPanel
         }
 
         return $DivisionsList->divisions;
+    }
+
+    public function getMainPageUrl()
+    {
+        return menu_page_url($this->main_page_key, false);
+    }
+
+    public function getSettingsPageUrl()
+    {
+        return menu_page_url($this->settings_page_key, false);
     }
 }

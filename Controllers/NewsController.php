@@ -3,12 +3,13 @@
 namespace CaritasApp\Controllers;
 
 use CaritasApp\Controllers\Controller;
+use CaritasApp\Core\Router;
 use CaritasApp\Models\News;
 use CaritasApp\Models\NewsList;
 
 class NewsController extends Controller
 {
-    const BASE_PATH = '/aktualnosci';
+    const BASE_PATH = Router::NEWS_PATH;
 
     public function index()
     {

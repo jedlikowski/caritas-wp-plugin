@@ -3,6 +3,7 @@
 namespace CaritasApp\Controllers;
 
 use CaritasApp\Controllers\Controller;
+use CaritasApp\Core\Router;
 
 class PaymentController extends Controller
 {
@@ -24,6 +25,38 @@ class PaymentController extends Controller
             wp_die('Coś poszło nie tak przy inicjalizacji płatności.');
         }
 
-        wp_redirect($res->url);
+        $urlParts = wp_parse_url($res->url);
+
+        // failed to parse payment redirection url, show error view
+        if (empty($urlParts)) {
+            wp_redirect(site_url(Router::PAYMENT_ERROR_PATH));
+            return;
+        }
+
+        // prepare payment redirection url received from the API by adding custom success and error urls
+        $returnUrlQuery = http_build_query([
+            'success_url' => site_url(Router::PAYMENT_SUCCESS_PATH),
+            'error_url' => site_url(Router::PAYMENT_ERROR_PATH),
+        ]);
+
+        if (empty($urlParts['query'])) {
+            $urlParts['query'] = $returnUrlQuery;
+        } else {
+            $urlParts['query'] .= '&' . $returnUrlQuery;
+        }
+
+        echo http_build_url($urlParts);
+        exit;
+        wp_redirect(http_build_url($urlParts));
+    }
+
+    public function paymentSuccess()
+    {
+        return $this->renderTemplate('payment-success');
+    }
+
+    public function paymentError()
+    {
+        return $this->renderTemplate('payment-error');
     }
 }

@@ -3,7 +3,7 @@ namespace CaritasApp\Core;
 
 class Api
 {
-    private $base_path = 'https://aplikacjacaritas.pl';
+    const BASE_PATH = 'https://aplikacjacaritas.pl';
 
     public function get(string $path = '', array $query = [])
     {
@@ -63,10 +63,10 @@ class Api
     public function getUrl(string $url = '')
     {
         $url = trim($url, '/');
-        if (strpos($url, $this->base_path) === 0) {
+        if (strpos($url, static::BASE_PATH) === 0) {
             return $url;
         }
 
-        return $this->base_path . '/api/' . $url;
+        return static::BASE_PATH . '/api/' . $url;
     }
 }
