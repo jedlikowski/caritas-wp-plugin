@@ -45,8 +45,6 @@ class PaymentController extends Controller
             $urlParts['query'] .= '&' . $returnUrlQuery;
         }
 
-        echo http_build_url($urlParts);
-        exit;
         wp_redirect(http_build_url($urlParts));
     }
 
