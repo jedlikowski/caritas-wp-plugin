@@ -13,6 +13,8 @@ class PaymentController extends Controller
             'price' => 0,
             'name' => '',
             'email' => '',
+            'success_url' => site_url(Router::PAYMENT_SUCCESS_PATH),
+            'error_url' => site_url(Router::PAYMENT_ERROR_PATH),
         ];
 
         $data['price'] = empty($_POST['price']) ? $data['price'] : caritas_app_parse_formatted_price($_POST['price']);
@@ -25,27 +27,7 @@ class PaymentController extends Controller
             wp_die('Coś poszło nie tak przy inicjalizacji płatności.');
         }
 
-        $urlParts = wp_parse_url($res->url);
-
-        // failed to parse payment redirection url, show error view
-        if (empty($urlParts)) {
-            wp_redirect(site_url(Router::PAYMENT_ERROR_PATH));
-            return;
-        }
-
-        // prepare payment redirection url received from the API by adding custom success and error urls
-        $returnUrlQuery = http_build_query([
-            'success_url' => site_url(Router::PAYMENT_SUCCESS_PATH),
-            'error_url' => site_url(Router::PAYMENT_ERROR_PATH),
-        ]);
-
-        if (empty($urlParts['query'])) {
-            $urlParts['query'] = $returnUrlQuery;
-        } else {
-            $urlParts['query'] .= '&' . $returnUrlQuery;
-        }
-
-        wp_redirect(http_build_url($urlParts));
+        wp_redirect($res->url);
     }
 
     public function paymentSuccess()
