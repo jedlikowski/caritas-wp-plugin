@@ -112,6 +112,9 @@ class Router
      */
     public function renderRoute()
     {
+        global $post;
+        $post = null;
+
         $requestedRoute = get_query_var($this->queryVar);
         if (!$requestedRoute || empty($requestedRoute)) {
             return;

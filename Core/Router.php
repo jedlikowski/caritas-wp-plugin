@@ -14,20 +14,30 @@ class Router
     const PAYMENT_SUCCESS_PATH = '/platnosc-zakonczona';
     const PAYMENT_ERROR_PATH = '/blad-platnosci';
 
-    public function __construct()
+    public function __construct(array $options = [])
     {
-        // Define mock routes to not create fake pages for each route
+        $options = wp_parse_args($options, [
+            'targets_enabled' => true,
+            'news_enabled' => true,
+        ]);
+
+        $routes = [];
+        if ($options['targets_enabled']) {
+            $routes[static::TARGETS_PATH . '/*/wesprzyj'] = TargetController::class . "@paymentMethods";
+            $routes[static::TARGETS_PATH . '/*'] = TargetController::class . "@show";
+            $routes[static::TARGETS_PATH] = TargetController::class . "@index";
+            $routes[static::BANK_TRANSFER_PATH] = PaymentController::class . "@processBankTransfer";
+            $routes[static::PAYMENT_SUCCESS_PATH] = PaymentController::class . "@paymentSuccess";
+            $routes[static::PAYMENT_ERROR_PATH] = PaymentController::class . "@paymentError";
+        }
+
+        if ($options['news_enabled']) {
+            $routes[static::NEWS_PATH . '/*'] = NewsController::class . "@show";
+            $routes[static::NEWS_PATH] = NewsController::class . "@index";
+        }
+
         try {
-            $router = new WP_Router([
-                static::NEWS_PATH . '/*' => NewsController::class . "@show",
-                static::NEWS_PATH => NewsController::class . "@index",
-                static::TARGETS_PATH . '/*/wesprzyj' => TargetController::class . "@paymentMethods",
-                static::TARGETS_PATH . '/*' => TargetController::class . "@show",
-                static::TARGETS_PATH => TargetController::class . "@index",
-                static::BANK_TRANSFER_PATH => PaymentController::class . "@processBankTransfer",
-                static::PAYMENT_SUCCESS_PATH => PaymentController::class . "@paymentSuccess",
-                static::PAYMENT_ERROR_PATH => PaymentController::class . "@paymentError",
-            ]);
+            $router = new WP_Router($routes);
         } catch (\Exception $e) {
             wp_die($e->getMessage());
         }

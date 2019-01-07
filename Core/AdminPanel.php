@@ -2,8 +2,7 @@
 
 namespace CaritasApp\Core;
 
-use CaritasApp\Core\Api;
-use CaritasApp\Models\DivisionsList;
+use CaritasApp\Core\AdminPanelSettings;
 
 class AdminPanel
 {
@@ -14,6 +13,7 @@ class AdminPanel
     public function __construct()
     {
         add_action('admin_menu', [$this, 'registerAdminPages']);
+        new AdminPanelSettings();
     }
 
     public function registerAdminPages()
@@ -23,7 +23,7 @@ class AdminPanel
             'Aplikacja Caritas',
             'edit_posts',
             $this->main_page_key,
-            [$this, 'renderMainPage'],
+            [$this, 'renderCMSPage'],
             'dashicons-smartphone',
             6
         );
@@ -38,9 +38,9 @@ class AdminPanel
         );
     }
 
-    public function renderMainPage()
+    public function renderCMSPage()
     {
-        return $this->renderTemplate('home', [
+        return $this->renderTemplate('cms', [
             'iframe_url' => $this->iframe_url,
         ]);
     }
@@ -48,16 +48,10 @@ class AdminPanel
     public function renderSettingsPage()
     {
         global $caritas_app_plugin;
-        if (!empty($_POST) && !empty($_POST['division'])) {
-            if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'caritas-app-division-save')) {
-                wp_die('Nie masz uprawnień do zmiany Caritas');
-            }
-
-            $caritas_app_plugin->setSelectedDivision($_POST['division']);
-        }
 
         return $this->renderTemplate('settings', [
-            'divisions' => $this->getDivisions(),
+            'targets_view_enabled' => $caritas_app_plugin->isTargetsViewEnabled(),
+            'news_view_enabled' => $caritas_app_plugin->isNewsViewEnabled(),
             'selected_division' => $caritas_app_plugin->getSelectedDivision(),
         ]);
     }
@@ -80,19 +74,6 @@ class AdminPanel
 
         require_once $template_path;
     }
-
-    private function getDivisions()
-    {
-        $api = new Api();
-        $DivisionsList = new DivisionsList;
-        $res = $api->get('/divisions');
-        if (!empty($res)) {
-            $DivisionsList = new DivisionsList($res);
-        }
-
-        return $DivisionsList->divisions;
-    }
-
     public function getMainPageUrl()
     {
         return menu_page_url($this->main_page_key, false);

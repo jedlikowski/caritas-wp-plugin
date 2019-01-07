@@ -50,25 +50,6 @@ class Controller
     {
         global $caritas_app_plugin;
 
-        // Define any data variables which will be used by the template
-        foreach ($variables as $variable => $value) {
-            $$variable = $value;
-        }
-
-        // Allow themes to define custom templates
-        $custom_template_path = locate_template('caritas-app-templates/' . $template . '.php', false, false);
-        if (!empty($custom_template_path)) {
-            require_once $custom_template_path;
-            return;
-        }
-
-        // get path to basic template from the plugin directory
-        $template_path = $caritas_app_plugin->plugin_path . 'templates/' . $template . '.php';
-
-        if (!file_exists($template_path)) {
-            wp_die('Caritas App  plugin is missing <strong>' . $template . '.php</strong> template!');
-        }
-
-        require_once $template_path;
+        return $caritas_app_plugin->renderTemplate($template, $variables);
     }
 }

@@ -6,7 +6,7 @@ Description: Ta wtyczka dodaje funkcjonalności Aplikacji Caritas do strony inte
 Author: Indico Plus | biuro@indicoplus.pl
 Author URI: https://aplikacjacaritas.pl
 Text Domain: caritas-app
-Version: 1.0
+Version: 1.1
  */
 defined('ABSPATH') or die('No script kiddies please!');
 
@@ -15,6 +15,10 @@ $plugin_path = plugin_dir_path(__FILE__);
 
 if (version_compare($wp_version, "5.0", "<")) {
     exit(__("Wtyczka Aplikacja Caritas wymaga WordPressa w wersji co najmniej 5.0", 'caritas-app'));
+}
+
+if (version_compare(PHP_VERSION, "7.1", "<")) {
+    exit(__("Wtyczka Aplikacja Caritas wymaga PHP w wersji co najmniej 7.1", 'caritas-app'));
 }
 
 require_once 'autoload.php';
