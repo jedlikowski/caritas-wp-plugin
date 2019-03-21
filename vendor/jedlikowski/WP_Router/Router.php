@@ -112,9 +112,6 @@ class Router
      */
     public function renderRoute()
     {
-        global $post;
-        $post = null;
-
         $requestedRoute = get_query_var($this->queryVar);
         if (!$requestedRoute || empty($requestedRoute)) {
             return;
@@ -127,6 +124,9 @@ class Router
         if (!$routeHandler) {
             static::set404();
         }
+
+        global $post;
+        $post = null;
 
         if (strpos($routeHandler, "@") === false && is_callable($routeHandler)) {
             return $this->callRouteHandler($routeHandler, $requestedRoute);
