@@ -3,6 +3,7 @@
 namespace CaritasApp\Core;
 
 use CaritasApp\Core\AdminPanel;
+use CaritasApp\Core\Api;
 use CaritasApp\Core\Router;
 
 class Plugin
@@ -13,6 +14,7 @@ class Plugin
     private $targetsViewEnabled = false;
     private $newsViewEnabled = false;
     private $router = null;
+    private $api = null;
     private $adminPanel = null;
 
     public function __construct($plugin_path)
@@ -21,6 +23,7 @@ class Plugin
 
         $this->plugin_path = $plugin_path;
         $this->adminPanel = new AdminPanel();
+        $this->api = new Api();
 
         if ($this->getSelectedDivision()) {
             $this->router = new Router([
@@ -116,5 +119,14 @@ class Plugin
 
         require_once $template_path;
 
+    }
+
+    public function getApiInstance()
+    {
+        if (empty($this->api)) {
+            $this->api = new Api();
+        }
+
+        return $this->api;
     }
 }

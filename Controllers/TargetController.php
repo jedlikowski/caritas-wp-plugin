@@ -4,9 +4,6 @@ namespace CaritasApp\Controllers;
 
 use CaritasApp\Controllers\Controller;
 use CaritasApp\Core\Router;
-use CaritasApp\Models\Target;
-use CaritasApp\Models\TargetPaymentMethods;
-use CaritasApp\Models\TargetsList;
 
 class TargetController extends Controller
 {
@@ -14,32 +11,18 @@ class TargetController extends Controller
 
     public function index()
     {
-        $TargetsList = new TargetsList();
-        global $caritas_app_plugin;
-
-        $res = $this->api->get('/targets', [
-            'division_id' => $caritas_app_plugin->getSelectedDivision(),
-        ]);
-        if (!empty($res)) {
-            $TargetsList = new TargetsList($res);
-        }
-
         return $this->renderTemplate('targets', [
-            'TargetsList' => $TargetsList,
+            'TargetsList' => caritas_app_get_targets_list(),
         ]);
     }
 
     public function show($path)
     {
         $id = $this->cleanPath($path);
-        if (!is_numeric($id)) {
-            $this->abort();
-        }
+        $Target = caritas_app_get_target($id);
 
-        $Target = new Target;
-        $res = $this->api->get('/targets/' . $id);
-        if (!empty($res)) {
-            $Target = new Target($res);
+        if (!$Target) {
+            $this->abort();
         }
 
         return $this->renderTemplate('target-single', [
@@ -56,35 +39,15 @@ class TargetController extends Controller
             $this->abort();
         }
 
-        $query = [];
-        $params = ['detailed_target_id', 'price'];
-        foreach ($params as $param) {
-            if (!empty($_GET[$param])) {
-                $query[$param] = $_GET[$param];
-            }
-        }
+        $data = caritas_app_get_target_payment_methods(intval($id), $_GET);
 
-        $TargetPaymentMethods = new TargetPaymentMethods;
-        $res = $this->api->get('/targets/' . $id . '/payment-methods', $query);
-        if (!empty($res)) {
-            $TargetPaymentMethods = new TargetPaymentMethods($res);
-        }
-
-        $paymentUrl = null;
-        foreach ($TargetPaymentMethods->methods as $method) {
-            if ($method->type !== 'bank-transfer') {
-                continue;
-            }
-            $paymentUrl = $method->url;
-        }
-
-        if (empty($paymentUrl)) {
+        if (!$data || empty($data->paymentUrl)) {
             $this->abort();
         }
 
         return $this->renderTemplate('target-payment-form', [
-            'TargetPaymentMethods' => $TargetPaymentMethods,
-            'paymentUrl' => $paymentUrl,
+            'TargetPaymentMethods' => $data->TargetPaymentMethods,
+            'paymentUrl' => $data->paymentUrl,
         ]);
     }
 }

@@ -1,5 +1,26 @@
 <?php
 
+if (!function_exists('caritas_app_get_targets_list')) {
+    function caritas_app_get_targets_list()
+    {
+        return CaritasApp\Core\DataFetcher::getTargetsList();
+    }
+}
+
+if (!function_exists('caritas_app_get_target')) {
+    function caritas_app_get_target(int $id)
+    {
+        return CaritasApp\Core\DataFetcher::getTarget($id);
+    }
+}
+
+if (!function_exists('caritas_app_get_target_payment_methods')) {
+    function caritas_app_get_target_payment_methods(int $id, array $additional = [])
+    {
+        return CaritasApp\Core\DataFetcher::getTargetPaymentMethods($id, $additional);
+    }
+}
+
 if (!function_exists('caritas_app_get_formatted_price')) {
     /**
      * Convert gr to zl

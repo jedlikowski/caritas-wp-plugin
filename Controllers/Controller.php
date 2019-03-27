@@ -12,7 +12,8 @@ class Controller
 
     public function __construct()
     {
-        $this->api = new Api();
+        global $caritas_app_plugin;
+        $this->api = $caritas_app_plugin->getApiInstance();
     }
 
     public function index()
