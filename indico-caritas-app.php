@@ -6,7 +6,7 @@ Description: Ta wtyczka dodaje funkcjonalności Aplikacji Caritas do strony inte
 Author: Indico Plus | biuro@indicoplus.pl
 Author URI: https://aplikacjacaritas.pl
 Text Domain: caritas-app
-Version: 1.1
+Version: 1.2.0
  */
 defined('ABSPATH') or die('No script kiddies please!');
 
