@@ -13,7 +13,7 @@ class Updater
         $this->updater = Puc_v4_Factory::buildUpdateChecker(
             'https://github.com/jedlikowski/caritas-wp-plugin/',
             $plugin_path,
-            'indicoplus/caritas-wp-plugin'
+            'caritas-wp-plugin'
         );
         $this->updater->getVcsApi()->enableReleaseAssets();
     }
