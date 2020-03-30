@@ -11,6 +11,8 @@ class TargetListItem
     public $summary = null;
     public $name = null;
     public $division = null;
+    public $target_amount = 0;
+    public $collected_amount = 0;
 
     public function __construct($json = null)
     {
@@ -23,5 +25,7 @@ class TargetListItem
         $this->summary = empty($json->summary) ? null : $json->summary;
         $this->name = empty($json->name) ? null : $json->name;
         $this->division = empty($json->division) ? null : $json->division;
+        $this->target_amount = empty($json->target_amount) ? 0 : intval($json->target_amount);
+        $this->collected_amount = empty($json->collected_amount) ? 0 : intval($json->collected_amount);
     }
 }

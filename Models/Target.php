@@ -11,6 +11,8 @@ class Target
     public $name = '';
     public $description = '';
     public $gallery = [];
+    public $target_amount = 0;
+    public $collected_amount = 0;
 
     public function __construct($json = null)
     {
@@ -21,6 +23,8 @@ class Target
         $this->id = empty($json->id) ? '' : $json->id;
         $this->name = empty($json->name) ? '' : $json->name;
         $this->description = empty($json->description) ? '' : $json->description;
+        $this->target_amount = empty($json->target_amount) ? 0 : intval($json->target_amount);
+        $this->collected_amount = empty($json->collected_amount) ? 0 : intval($json->collected_amount);
 
         if (!empty($json->gallery) && is_array($json->gallery)) {
             $this->gallery = array_map(function ($item) {
