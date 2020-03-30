@@ -21,5 +21,8 @@
     "psr-4": {
       "IndicoPlus\\CaritasApp\\": "lib/"
     }
+  },
+  "scripts": {
+    "prepare-release": "zip -r -X caritas-wp-plugin.zip . -x \"*.git*\" -x \"*.DS_Store\"",
   }
 }
