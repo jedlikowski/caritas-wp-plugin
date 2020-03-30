@@ -11,7 +11,6 @@ Version: 1.3.2
 defined('ABSPATH') or die('No script kiddies please!');
 
 global $wp_version;
-$plugin_path = plugin_dir_path(__FILE__);
 
 if (version_compare($wp_version, "5.0", "<")) {
     exit(__("Wtyczka Aplikacja Caritas wymaga WordPressa w wersji co najmniej 5.0", 'caritas-app'));
@@ -25,6 +24,6 @@ require_once 'vendor/autoload.php';
 require_once 'functions.php';
 
 global $caritas_app_plugin;
-$caritas_app_plugin = new \IndicoPlus\CaritasApp\Core\Plugin($plugin_path, __FILE__);
+$caritas_app_plugin = new \IndicoPlus\CaritasApp\Core\Plugin(__FILE__);
 
 register_activation_hook(__FILE__, [$caritas_app_plugin, 'handleActivation']);

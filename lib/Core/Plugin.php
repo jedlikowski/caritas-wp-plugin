@@ -19,11 +19,11 @@ class Plugin
     private $adminPanel = null;
     private $updater = null;
 
-    public function __construct(string $plugin_path, string $plugin_file)
+    public function __construct(string $plugin_file)
     {
         $this->loadSettings();
 
-        $this->plugin_path = $plugin_path;
+        $this->plugin_path = plugin_dir_path($plugin_file);
         $this->adminPanel = new AdminPanel();
         $this->api = new Api();
         $this->updater = new Updater($plugin_file);
