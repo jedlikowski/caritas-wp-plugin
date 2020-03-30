@@ -4,9 +4,9 @@ Plugin Name: Aplikacja Caritas
 Plugin URI: https://aplikacjacaritas.pl
 Description: Ta wtyczka dodaje funkcjonalności Aplikacji Caritas do strony internetowej.
 Author: Indico Plus | biuro@indicoplus.pl
-Author URI: https://indicoplus.pl
+Author URI: https://aplikacjacaritas.pl
 Text Domain: caritas-app
-Version: 1.3.0
+Version: 1.3.1
  */
 defined('ABSPATH') or die('No script kiddies please!');
 
@@ -25,6 +25,6 @@ require_once 'vendor/autoload.php';
 require_once 'functions.php';
 
 global $caritas_app_plugin;
-$caritas_app_plugin = new \IndicoPlus\CaritasApp\Core\Plugin($plugin_path);
+$caritas_app_plugin = new \IndicoPlus\CaritasApp\Core\Plugin($plugin_path, __FILE__);
 
 register_activation_hook(__FILE__, [$caritas_app_plugin, 'handleActivation']);

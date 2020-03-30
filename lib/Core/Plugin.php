@@ -5,6 +5,7 @@ namespace IndicoPlus\CaritasApp\Core;
 use IndicoPlus\CaritasApp\Core\AdminPanel;
 use IndicoPlus\CaritasApp\Core\Api;
 use IndicoPlus\CaritasApp\Core\Router;
+use IndicoPlus\CaritasApp\Core\Updater;
 
 class Plugin
 {
@@ -16,14 +17,16 @@ class Plugin
     private $router = null;
     private $api = null;
     private $adminPanel = null;
+    private $updater = null;
 
-    public function __construct($plugin_path)
+    public function __construct(string $plugin_path, string $plugin_file)
     {
         $this->loadSettings();
 
         $this->plugin_path = $plugin_path;
         $this->adminPanel = new AdminPanel();
         $this->api = new Api();
+        $this->updater = new Updater($plugin_file);
 
         if ($this->getSelectedDivision()) {
             $this->router = new Router([
