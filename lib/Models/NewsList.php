@@ -1,8 +1,8 @@
 <?php
 
-namespace CaritasApp\Models;
+namespace IndicoPlus\CaritasApp\Models;
 
-use CaritasApp\Models\NewsListItem;
+use IndicoPlus\CaritasApp\Models\NewsListItem;
 
 class NewsList
 {

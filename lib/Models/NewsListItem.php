@@ -1,9 +1,9 @@
 <?php
 
-namespace CaritasApp\Models;
+namespace IndicoPlus\CaritasApp\Models;
 
-use CaritasApp\Models\Date;
-use CaritasApp\Models\Photo;
+use IndicoPlus\CaritasApp\Models\Date;
+use IndicoPlus\CaritasApp\Models\Photo;
 
 class NewsListItem
 {

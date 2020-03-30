@@ -1,10 +1,10 @@
 <?php
 
-namespace CaritasApp\Core;
+namespace IndicoPlus\CaritasApp\Core;
 
-use CaritasApp\Core\AdminPanel;
-use CaritasApp\Core\Api;
-use CaritasApp\Core\Router;
+use IndicoPlus\CaritasApp\Core\AdminPanel;
+use IndicoPlus\CaritasApp\Core\Api;
+use IndicoPlus\CaritasApp\Core\Router;
 
 class Plugin
 {

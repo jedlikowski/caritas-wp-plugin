@@ -1,11 +1,11 @@
 <?php
 
-namespace CaritasApp\Controllers;
+namespace IndicoPlus\CaritasApp\Controllers;
 
-use CaritasApp\Controllers\Controller;
-use CaritasApp\Core\Router;
-use CaritasApp\Models\News;
-use CaritasApp\Models\NewsList;
+use IndicoPlus\CaritasApp\Controllers\Controller;
+use IndicoPlus\CaritasApp\Core\Router;
+use IndicoPlus\CaritasApp\Models\News;
+use IndicoPlus\CaritasApp\Models\NewsList;
 
 class NewsController extends Controller
 {

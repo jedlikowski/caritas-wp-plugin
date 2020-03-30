@@ -1,9 +1,9 @@
 <?php
 
-namespace CaritasApp\Core;
+namespace IndicoPlus\CaritasApp\Core;
 
-use CaritasApp\Core\Api;
-use CaritasApp\Models\DivisionsList;
+use IndicoPlus\CaritasApp\Core\Api;
+use IndicoPlus\CaritasApp\Models\DivisionsList;
 
 class AdminPanelSettings
 {

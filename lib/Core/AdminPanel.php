@@ -1,8 +1,8 @@
 <?php
 
-namespace CaritasApp\Core;
+namespace IndicoPlus\CaritasApp\Core;
 
-use CaritasApp\Core\AdminPanelSettings;
+use IndicoPlus\CaritasApp\Core\AdminPanelSettings;
 
 class AdminPanel
 {
@@ -69,7 +69,7 @@ class AdminPanel
         $template_path = $caritas_app_plugin->plugin_path . 'templates-admin/' . $template . '.php';
 
         if (!file_exists($template_path)) {
-            wp_die('Caritas App  plugin is missing admin <strong>' . $template . '.php</strong> template!');
+            wp_die('Caritas App plugin is missing admin <strong>' . $template . '.php</strong> template!');
         }
 
         require_once $template_path;

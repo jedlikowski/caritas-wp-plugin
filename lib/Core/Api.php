@@ -1,5 +1,5 @@
 <?php
-namespace CaritasApp\Core;
+namespace IndicoPlus\CaritasApp\Core;
 
 class Api
 {

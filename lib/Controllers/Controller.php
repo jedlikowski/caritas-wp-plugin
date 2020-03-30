@@ -1,8 +1,8 @@
 <?php
 
-namespace CaritasApp\Controllers;
+namespace IndicoPlus\CaritasApp\Controllers;
 
-use CaritasApp\Core\Api;
+use IndicoPlus\CaritasApp\Core\Api;
 
 class Controller
 {

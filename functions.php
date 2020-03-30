@@ -1,23 +1,25 @@
 <?php
+use IndicoPlus\CaritasApp\Core\DataFetcher;
+use IndicoPlus\CaritasApp\Core\Helper;
 
 if (!function_exists('caritas_app_get_targets_list')) {
     function caritas_app_get_targets_list()
     {
-        return CaritasApp\Core\DataFetcher::getTargetsList();
+        return DataFetcher::getTargetsList();
     }
 }
 
 if (!function_exists('caritas_app_get_target')) {
     function caritas_app_get_target(int $id)
     {
-        return CaritasApp\Core\DataFetcher::getTarget($id);
+        return DataFetcher::getTarget($id);
     }
 }
 
 if (!function_exists('caritas_app_get_target_payment_methods')) {
     function caritas_app_get_target_payment_methods(int $id, array $additional = [])
     {
-        return CaritasApp\Core\DataFetcher::getTargetPaymentMethods($id, $additional);
+        return DataFetcher::getTargetPaymentMethods($id, $additional);
     }
 }
 
@@ -30,7 +32,7 @@ if (!function_exists('caritas_app_get_formatted_price')) {
      */
     function caritas_app_get_formatted_price(int $price)
     {
-        return CaritasApp\Core\Helper::getFormattedPrice($price);
+        return Helper::getFormattedPrice($price);
     }
 }
 
@@ -43,7 +45,7 @@ if (!function_exists('caritas_app_parse_formatted_price')) {
      */
     function caritas_app_parse_formatted_price($price)
     {
-        return CaritasApp\Core\Helper::parseFormattedPrice($price);
+        return Helper::parseFormattedPrice($price);
     }
 }
 

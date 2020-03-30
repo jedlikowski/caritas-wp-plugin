@@ -1,8 +1,8 @@
 <?php
 
-namespace CaritasApp\Models;
+namespace IndicoPlus\CaritasApp\Models;
 
-use CaritasApp\Models\DivisionListItem;
+use IndicoPlus\CaritasApp\Models\DivisionListItem;
 
 class DivisionsList
 {

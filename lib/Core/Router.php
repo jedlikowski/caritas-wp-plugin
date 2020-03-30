@@ -1,9 +1,9 @@
 <?php
-namespace CaritasApp\Core;
+namespace IndicoPlus\CaritasApp\Core;
 
-use CaritasApp\Controllers\NewsController;
-use CaritasApp\Controllers\PaymentController;
-use CaritasApp\Controllers\TargetController;
+use IndicoPlus\CaritasApp\Controllers\NewsController;
+use IndicoPlus\CaritasApp\Controllers\PaymentController;
+use IndicoPlus\CaritasApp\Controllers\TargetController;
 use jedlikowski\WP_Router\Router as WP_Router;
 
 class Router

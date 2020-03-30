@@ -1,6 +1,6 @@
 <?php
 
-namespace CaritasApp\Models;
+namespace IndicoPlus\CaritasApp\Models;
 
 class Photo
 {

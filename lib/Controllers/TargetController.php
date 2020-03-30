@@ -1,9 +1,9 @@
 <?php
 
-namespace CaritasApp\Controllers;
+namespace IndicoPlus\CaritasApp\Controllers;
 
-use CaritasApp\Controllers\Controller;
-use CaritasApp\Core\Router;
+use IndicoPlus\CaritasApp\Controllers\Controller;
+use IndicoPlus\CaritasApp\Core\Router;
 
 class TargetController extends Controller
 {

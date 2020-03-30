@@ -1,10 +1,10 @@
 <?php
 
-namespace CaritasApp\Core;
+namespace IndicoPlus\CaritasApp\Core;
 
-use CaritasApp\Models\Target;
-use CaritasApp\Models\TargetPaymentMethods;
-use CaritasApp\Models\TargetsList;
+use IndicoPlus\CaritasApp\Models\Target;
+use IndicoPlus\CaritasApp\Models\TargetPaymentMethods;
+use IndicoPlus\CaritasApp\Models\TargetsList;
 
 class DataFetcher
 {

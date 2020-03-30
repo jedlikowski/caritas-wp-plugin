@@ -1,9 +1,9 @@
 <?php
 
-namespace CaritasApp\Models;
+namespace IndicoPlus\CaritasApp\Models;
 
-use CaritasApp\Models\DetailedTarget;
-use CaritasApp\Models\Photo;
+use IndicoPlus\CaritasApp\Models\DetailedTarget;
+use IndicoPlus\CaritasApp\Models\Photo;
 
 class Target
 {
