@@ -42,7 +42,7 @@
         <p><strong>Przykład użycia:</strong></p>
         <p><code><?php echo htmlspecialchars('<?php $targets = caritas_app_get_targets_list();?>'); ?></code></p>
         <p><strong>Zwracane dane:</strong></p>
-        <p>obiekt klasy <code>CaritasApp\Models\TargetsList</code></p>
+        <p>obiekt klasy <code>IndicoPlus\CaritasApp\Models\TargetsList</code></p>
       </li>
       <li style="margin-bottom:50px">
         <p>
@@ -52,7 +52,7 @@
         <p><strong>Przykład użycia:</strong></p>
         <p><code><?php echo htmlspecialchars('<?php $target = caritas_app_get_target(22);?>'); ?></code></p>
         <p><strong>Zwracane dane:</strong></p>
-        <p>obiekt klasy <code>CaritasApp\Models\Target</code></p>
+        <p>obiekt klasy <code>IndicoPlus\CaritasApp\Models\Target</code></p>
       </li>
       <li style="margin-bottom:50px">
         <p>
@@ -76,7 +76,8 @@
         <p><strong>Zwracane dane:</strong></p>
         <p>obiekt klasy <code>stdClass</code>, zawierający:
           <br />
-          - <code>TargetPaymentMethods</code> -> obiekt klasy <code>CaritasApp\Models\TargetPaymentMethods</code>
+          - <code>TargetPaymentMethods</code> -> obiekt klasy
+          <code>IndicoPlus\CaritasApp\Models\TargetPaymentMethods</code>
           <br />
           - <code>paymentUrl</code> -> link na który należy przesłać dane z formularza płatności
         </p>
