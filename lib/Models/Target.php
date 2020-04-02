@@ -11,6 +11,7 @@ class Target
     public $name = '';
     public $description = '';
     public $gallery = [];
+    public $payments = 0;
     public $target_amount = 0;
     public $collected_amount = 0;
 
@@ -23,6 +24,7 @@ class Target
         $this->id = empty($json->id) ? '' : $json->id;
         $this->name = empty($json->name) ? '' : $json->name;
         $this->description = empty($json->description) ? '' : $json->description;
+        $this->payments = empty($json->payments) ? 0 : intval($json->payments);
         $this->target_amount = empty($json->target_amount) ? 0 : intval($json->target_amount);
         $this->collected_amount = empty($json->collected_amount) ? 0 : intval($json->collected_amount);
 
