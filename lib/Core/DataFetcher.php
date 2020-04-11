@@ -11,7 +11,7 @@ class DataFetcher
     public static function getTargetsList()
     {
         global $caritas_app_plugin;
-        $api = self::getApiInstance();
+        $api = static::getApiInstance();
 
         $res = $api->get('/targets', [
             'division_id' => $caritas_app_plugin->getSelectedDivision(),
@@ -25,7 +25,7 @@ class DataFetcher
 
     public static function getTarget(int $id)
     {
-        $api = self::getApiInstance();
+        $api = static::getApiInstance();
         if (!is_numeric($id)) {
             return null;
         }
@@ -54,7 +54,7 @@ class DataFetcher
             $query[$param] = $additional[$param];
         }
 
-        $api = self::getApiInstance();
+        $api = static::getApiInstance();
         $res = $api->get('/targets/' . $targetId . '/payment-methods', $query);
         if (!empty($res)) {
             $returnValue->TargetPaymentMethods = new TargetPaymentMethods($res);

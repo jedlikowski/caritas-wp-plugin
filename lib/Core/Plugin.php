@@ -4,6 +4,7 @@ namespace IndicoPlus\CaritasApp\Core;
 
 use IndicoPlus\CaritasApp\Core\AdminPanel;
 use IndicoPlus\CaritasApp\Core\Api;
+use IndicoPlus\CaritasApp\Core\Assets;
 use IndicoPlus\CaritasApp\Core\Router;
 use IndicoPlus\CaritasApp\Core\Updater;
 
@@ -18,6 +19,7 @@ class Plugin
     private $api = null;
     private $adminPanel = null;
     private $updater = null;
+    private $assets = null;
 
     public function __construct(string $plugin_file)
     {
@@ -27,6 +29,7 @@ class Plugin
         $this->adminPanel = new AdminPanel();
         $this->api = new Api();
         $this->updater = new Updater($plugin_file);
+        $this->assets = new Assets($this->plugin_path, $plugin_file);
 
         if ($this->getSelectedDivision()) {
             $this->router = new Router([
@@ -61,6 +64,11 @@ class Plugin
 
     public function showActivationAdminNotice()
     {
+        // division already selected, possibly because of a previous installation, no need to show the notice
+        if ($this->selectedDivision) {
+            return;
+        }
+
         /* Check transient, if available display notice */
         if (!get_transient($this->activationTransientName)) {
             return;

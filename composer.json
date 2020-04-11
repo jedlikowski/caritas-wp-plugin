@@ -9,7 +9,8 @@
   "require": {
     "php": ">=7.1",
     "yahnis-elsts/plugin-update-checker": "^4.9",
-    "jedlikowski/wordpress-router": "dev-master"
+    "jedlikowski/wordpress-router": "dev-master",
+    "tightenco/collect": "dev-master"
   },
   "repositories": [
     {
