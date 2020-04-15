@@ -3,21 +3,16 @@
   "type": "project",
   "version": "1.3.3",
   "minimum-stability": "dev",
+  "description": "",
   "config": {
     "preferred-install": "dist"
   },
   "require": {
     "php": ">=7.1",
     "yahnis-elsts/plugin-update-checker": "^4.9",
-    "jedlikowski/wordpress-router": "dev-master",
-    "tightenco/collect": "dev-master"
+    "tightenco/collect": "dev-master",
+    "jedlikowski/wordpress-router": "dev-master"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/jedlikowski/WP_Router"
-    }
-  ],
   "autoload": {
     "psr-4": {
       "IndicoPlus\\CaritasApp\\": "lib/"

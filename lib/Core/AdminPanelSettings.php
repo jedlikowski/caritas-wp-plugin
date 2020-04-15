@@ -47,6 +47,14 @@ class AdminPanelSettings
             'caritas_app_settings_page',
             'caritas_app_settings_page_section'
         );
+
+        add_settings_field(
+            'enable_custom_price',
+            __('Pokaż opcję "Własna kwota" w proponowanych wpłatach', 'caritas-app'),
+            [$this, 'renderCustomPriceField'],
+            'caritas_app_settings_page',
+            'caritas_app_settings_page_section'
+        );
     }
 
     public function renderDivisionsField()
@@ -69,22 +77,34 @@ class AdminPanelSettings
     {
         $options = get_option('caritas_app_settings');
         ?>
-        <select name='caritas_app_settings[enable_news_view]'>
-            <option value='1' <?php selected($options['enable_news_view'], 1);?>>Tak</option>
-            <option value='0' <?php selected($options['enable_news_view'], 0);?>>Nie</option>
-        </select>
-        <?php
+<select name='caritas_app_settings[enable_news_view]'>
+  <option value='1' <?php selected($options['enable_news_view'], 1);?>>Tak</option>
+  <option value='0' <?php selected($options['enable_news_view'], 0);?>>Nie</option>
+</select>
+<?php
 }
 
     public function renderTargetsEnableField()
     {
         $options = get_option('caritas_app_settings');
         ?>
-        <select name='caritas_app_settings[enable_targets_view]'>
-            <option value='1' <?php selected($options['enable_targets_view'], 1);?>>Tak</option>
-            <option value='0' <?php selected($options['enable_targets_view'], 0);?>>Nie</option>
-        </select>
-        <?php
+<select name='caritas_app_settings[enable_targets_view]'>
+  <option value='1' <?php selected($options['enable_targets_view'], 1);?>>Tak</option>
+  <option value='0' <?php selected($options['enable_targets_view'], 0);?>>Nie</option>
+</select>
+<?php
+}
+
+    public function renderCustomPriceField()
+    {
+        $options = get_option('caritas_app_settings');
+        $is_selected = empty($options['enable_custom_price']) ? 0 : $options['enable_custom_price'];
+        ?>
+<select name='caritas_app_settings[enable_custom_price]'>
+  <option value='1' <?php selected($is_selected, 1);?>>Tak</option>
+  <option value='0' <?php selected($is_selected, 0);?>>Nie</option>
+</select>
+<?php
 }
 
     private function getDivisions()

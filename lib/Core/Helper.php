@@ -12,7 +12,7 @@ class Helper
             return $price / 100;
         }
 
-        return number_format($price / 100, 2, ',');
+        return number_format($price / 100, 2, ',', "");
     }
 
     // convert zl to gr

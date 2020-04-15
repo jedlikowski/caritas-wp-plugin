@@ -1,0 +1,322 @@
+.caritas-app {
+  &-container {
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    padding: 16px;
+    max-width: 1070px;
+    margin: 0 auto;
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  &-title {
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  &-cards {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    list-style: none;
+    margin: 0 -8px;
+    padding: 0;
+  }
+
+  &-card-item {
+    display: flex;
+    padding: 0 8px 16px;
+    margin: 0;
+
+    @media (min-width: 640px) {
+      width: 50%;
+    }
+    @media (min-width: 896px) {
+      width: calc(100% / 3);
+    }
+  }
+
+  &-card {
+    position: relative;
+    background-color: $color-white;
+    border-radius: 4px;
+    box-shadow: 0 20px 40px -14px rgba(#000, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &-card-image {
+    background-color: #7b7b7b;
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    padding-bottom: 56.25%;
+  }
+
+  &-card-content {
+    padding: 16px;
+    background-color: $color-card-bg;
+  }
+
+  &-card-title {
+    color: $color-text;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    margin: 0px;
+  }
+
+  &-card-text {
+    color: $color-text;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    font-weight: 400;
+
+    p {
+      margin-bottom: 0;
+
+      &:last-of-type {
+        padding-bottom: 10px;
+      }
+    }
+
+    &::after {
+      content: "";
+      background-image: linear-gradient(
+        to bottom,
+        rgba($color-black, 0),
+        $color-card-bg,
+        $color-card-bg
+      );
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      height: 100px;
+      width: 100%;
+    }
+  }
+
+  &-btn-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 16px;
+  }
+
+  &-btn {
+    color: $color-white;
+    padding: 10px 13px;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    font-weight: 600;
+    display: block;
+    cursor: pointer;
+    border: 1px solid rgba($color-white, 0.2);
+    background: $color-accent;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-accent-hover;
+      border-color: $color-accent-hover;
+      transition: all 0.15s ease-in-out;
+      text-decoration: none;
+    }
+  }
+
+  &-target-gallery-slide {
+    background-position: center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    padding-bottom: 56.25%;
+  }
+
+  &-target-gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba($color-black, 0.7);
+    color: $color-white;
+    height: 5em;
+    width: 2.5em;
+    z-index: 4;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &.swiper-button-prev {
+      left: 0;
+    }
+
+    &.swiper-button-next {
+      right: 0;
+    }
+
+    &:hover {
+      background: $color-black;
+    }
+  }
+
+  &-target-gallery-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 4em;
+    line-height: 1;
+    transform-origin: center;
+    transform: translate(-50%, -50%) scale(0.4, 1);
+  }
+
+  &-target-detailed-targets ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-card-detailed-ammount {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 7px 21px;
+    background-color: $color-accent;
+    border-radius: 50px;
+    color: $color-white;
+    border: 2px solid #002b58;
+    font-weight: 600;
+    font-size: 1.5em;
+  }
+
+  &-target-payment-methods {
+    background-color: $color-white;
+    border-radius: 0.25rem;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    padding: 25px;
+    max-width: 550px;
+    margin: 0 auto;
+
+    h2 {
+      font-size: 0.8em;
+      margin-top: 0px;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      margin-bottom: 0px;
+    }
+  }
+
+  &-form-field {
+    margin-bottom: 30px;
+
+    input::placeholder {
+      color: #c1c1c1;
+      font-weight: 100;
+      font-family: Quicksand, serif;
+      font-size: 1.2em;
+    }
+  }
+
+  &-form-field label.required:after {
+    content: "*";
+    color: red;
+    margin-left: 5px;
+  }
+
+  &-form-input:not([type="checkbox"]) {
+    display: block;
+    margin-top: 3px;
+    height: 45px;
+    font-size: 0.9em;
+    color: #005cbf;
+    font-weight: 600;
+    padding-left: 15px;
+    padding-top: 4px;
+    border-radius: 8px;
+    border: 0px;
+    box-shadow: 0px 4px 9px 0px #9a9a9a69;
+    width: auto;
+    display: inline-block;
+  }
+
+  &-form-price &-form-input {
+    display: inline;
+    width: 173px;
+  }
+
+  &-form-price span {
+    font-size: 1.6em;
+    padding-left: 10px;
+    color: #7b7b7b;
+    font-weight: 500;
+  }
+
+  &-form-button {
+    color: $color-white;
+    padding: 0.8rem;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    font-weight: 600;
+    display: block;
+    cursor: pointer;
+    border: 1px solid rgba($color-white, 0.2);
+    background: $color-accent;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+      color: $color-white;
+      background-color: $color-accent-hover;
+      border-color: $color-accent-hover;
+      transition: all 0.15s ease-in-out;
+      text-decoration: none;
+    }
+  }
+
+  &-tpay {
+    font-size: 0.8em;
+    color: #2d9dff;
+    margin-top: 0.7em;
+  }
+
+  &-success {
+    font-size: 1.2em;
+    color: #03c524;
+    font-weight: 800;
+  }
+
+  &-error {
+    font-size: 1.2em;
+    color: red;
+    font-weight: 800;
+  }
+
+  &-ad {
+    img {
+      max-width: 150px;
+      display: inline-block;
+      vertical-align: middle;
+
+      a {
+        margin-top: 10px;
+        font-weight: 800;
+      }
+    }
+  }
+}

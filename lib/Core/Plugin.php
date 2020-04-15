@@ -12,9 +12,10 @@ class Plugin
 {
     public $plugin_path;
     private $activationTransientName = 'caritas-app-activation-notice-transient';
-    private $selectedDivision = null;
-    private $targetsViewEnabled = false;
-    private $newsViewEnabled = false;
+    public $selectedDivision = null;
+    public $targetsViewEnabled = false;
+    public $newsViewEnabled = false;
+    public $customPriceEnabled = false;
     private $router = null;
     private $api = null;
     private $adminPanel = null;
@@ -104,6 +105,12 @@ class Plugin
             $this->newsViewEnabled = (bool) intval($options['enable_news_view']);
         } else {
             $this->newsViewEnabled = false;
+        }
+
+        if (isset($options['enable_custom_price']) && is_numeric($options['enable_custom_price'])) {
+            $this->customPriceEnabled = (bool) intval($options['enable_custom_price']);
+        } else {
+            $this->customPriceEnabled = false;
         }
     }
 

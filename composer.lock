@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6779ea0beaf6f6572cad7ff9df28805c",
+    "content-hash": "74b075cb2ef7efea13e5a588df67f03e",
     "packages": [
         {
             "name": "jedlikowski/wordpress-router",
@@ -26,6 +26,7 @@
                     "jedlikowski\\WP_Router": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -35,10 +36,6 @@
                     "email": "jakub.jedlikowski@gmail.com"
                 }
             ],
-            "support": {
-                "source": "https://github.com/jedlikowski/WP_Router/tree/master",
-                "issues": "https://github.com/jedlikowski/WP_Router/issues"
-            },
             "time": "2019-03-21T09:54:30+00:00"
         },
         {
@@ -270,13 +267,14 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "jedlikowski/wordpress-router": 20,
-        "tightenco/collect": 20
+        "tightenco/collect": 20,
+        "jedlikowski/wordpress-router": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.1"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
