@@ -21,7 +21,7 @@
   "scripts": {
     "prepare-release": [
       "rm -rf release",
-      "zip -r -X release.zip . -x \"*.git*\" -x \"*.DS_Store\" -x \"*release/*\" ",
+      "zip -r -X release.zip . -x \"*.git*\" -x \"node_modules*\" -x \"src*\" -x \"*.DS_Store\" -x \"*release/*\" ",
       "mkdir release",
       "unzip release.zip -d ./release/caritas-wp-plugin",
       "rm release.zip",

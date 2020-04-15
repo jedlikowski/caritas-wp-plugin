@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "74b075cb2ef7efea13e5a588df67f03e",
+    "content-hash": "3063b04ac27faf1333097ff112fdb8dd",
     "packages": [
         {
             "name": "jedlikowski/wordpress-router",
