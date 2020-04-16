@@ -16,6 +16,7 @@ class Plugin
     public $targetsViewEnabled = false;
     public $newsViewEnabled = false;
     public $customPriceEnabled = false;
+    public $customPriceImage = "/image.jpg";
     private $router = null;
     private $api = null;
     private $adminPanel = null;
@@ -110,7 +111,11 @@ class Plugin
         if (isset($options['enable_custom_price']) && is_numeric($options['enable_custom_price'])) {
             $this->customPriceEnabled = (bool) intval($options['enable_custom_price']);
         } else {
-            $this->customPriceEnabled = false;
+            $this->customPriceEnabled = true;
+        }
+
+        if (isset($options['custom_price_image']) && wp_http_validate_url($options['custom_price_image'])) {
+            $this->customPriceImage = $options['custom_price_image'];
         }
     }
 

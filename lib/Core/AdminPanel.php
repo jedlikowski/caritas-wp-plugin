@@ -8,6 +8,7 @@ class AdminPanel
 {
     private $main_page_key = 'aplikacja-caritas';
     private $settings_page_key = 'ustawienia-aplikacji-caritas';
+    private $docs_page_key = 'dokumentacja-aplikacji-caritas';
     private $iframe_url = Api::BASE_PATH . '/cms';
 
     public function __construct()
@@ -36,6 +37,15 @@ class AdminPanel
             $this->settings_page_key,
             [$this, 'renderSettingsPage']
         );
+
+        add_submenu_page(
+            $this->main_page_key,
+            'Dokumentacja',
+            'Dokumentacja',
+            'edit_posts',
+            $this->docs_page_key,
+            [$this, 'renderDocsPage']
+        );
     }
 
     public function renderCMSPage()
@@ -54,6 +64,12 @@ class AdminPanel
             'news_view_enabled' => $caritas_app_plugin->isNewsViewEnabled(),
             'selected_division' => $caritas_app_plugin->getSelectedDivision(),
         ]);
+
+    }
+
+    public function renderDocsPage()
+    {
+        return $this->renderTemplate('docs');
     }
 
     private function renderTemplate(string $template = null, array $variables = [])

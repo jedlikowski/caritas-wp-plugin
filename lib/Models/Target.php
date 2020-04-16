@@ -43,7 +43,9 @@ class Target
 
     public function getCustomPricePhotoUrl()
     {
-        return '/image.jpg';
+        global $caritas_app_plugin;
+        return $caritas_app_plugin->customPriceImage;
+
     }
 
     public function getPaymentFormUrl(int $detailedTargetId = null, int $price = null)

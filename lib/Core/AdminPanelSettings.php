@@ -55,6 +55,14 @@ class AdminPanelSettings
             'caritas_app_settings_page',
             'caritas_app_settings_page_section'
         );
+
+        add_settings_field(
+            'custom_price_image',
+            __('Obrazek kafelka "Własna kwota"', 'caritas-app'),
+            [$this, 'renderCustomPriceImageField'],
+            'caritas_app_settings_page',
+            'caritas_app_settings_page_section'
+        );
     }
 
     public function renderDivisionsField()
@@ -104,6 +112,37 @@ class AdminPanelSettings
   <option value='1' <?php selected($is_selected, 1);?>>Tak</option>
   <option value='0' <?php selected($is_selected, 0);?>>Nie</option>
 </select>
+<?php
+}
+
+    public function renderCustomPriceImageField()
+    {
+        $options = get_option('caritas_app_settings');
+        $default_src = site_url("image.jpg");
+        $url = empty($options['custom_price_image']) ? $default_src : $options['custom_price_image'];
+        ?>
+
+<div class="caritas-app-media-input">
+  <p>
+    W przypadku braku wybranego obrazka wtyczka będzie próbowała użyć pliku
+    <code><?php echo $default_src; ?></code>
+  </p>
+  <img data-action="upload" src="<?php echo $url; ?>" data-default-src="<?php echo $default_src; ?>"
+    style="cursor: pointer; margin-top: 7px; max-width: 300px; max-height: 300px; display: block;"
+    alt="Plik nie istnieje" />
+  <input type="hidden" name="caritas_app_settings[custom_price_image]" value="<?php echo $url; ?>"
+    style="min-width: 300px;" />
+  <div style="margin-top: 10px;">
+    <button data-action="upload" type="button" class="button-primary">
+      <?php echo empty($options['custom_price_image']) ? "Wybierz obraz" : "Zmień obraz"; ?>
+    </button>
+    <?php if (!empty($options['custom_price_image'])) {?>
+    <button data-action="clear" type="button" class="button-secondary">
+      Usuń obraz
+    </button>
+    <?php }?>
+  </div>
+</div>
 <?php
 }
 

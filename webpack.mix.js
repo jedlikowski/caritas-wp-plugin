@@ -13,6 +13,7 @@ let mix = require("laravel-mix");
 
 mix
   .js("src/js/app.js", "dist/")
+  .js("src/js/admin/admin.js", "dist/")
   .sass("src/styles/app.scss", "dist/")
   .version();
 
