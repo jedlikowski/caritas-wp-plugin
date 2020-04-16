@@ -1,3 +1,7 @@
+# 1.4.1
+
+- Dodanie możliwości wyboru obrazka widocznego na kafelku "własna kwota".
+
 # 1.4.0
 
 - Dodanie domyślnych styli do widoku listy celów, pojedynczego celu oraz procesu płatności.
