@@ -3,13 +3,16 @@
 namespace IndicoPlus\CaritasApp\Core;
 
 use IndicoPlus\CaritasApp\Core\AdminPanel;
-use IndicoPlus\CaritasApp\Core\Api;
 use IndicoPlus\CaritasApp\Core\Assets;
 use IndicoPlus\CaritasApp\Core\Router;
 use IndicoPlus\CaritasApp\Core\Updater;
+use IndicoPlus\CaritasApp\Integrations\ElementorWidgets;
+use IndicoPlus\CaritasApp\Traits\Singleton;
 
 class Plugin
 {
+    use Singleton;
+
     public $plugin_path;
     public $plugin_file;
     private $activationTransientName = 'caritas-app-activation-notice-transient';
@@ -24,8 +27,6 @@ class Plugin
     private $updater = null;
     private $assets = null;
 
-    private static $_instance = null;
-
     public function __construct()
     {
         $this->loadSettings();
@@ -33,9 +34,9 @@ class Plugin
         $this->plugin_path = plugin_dir_path($plugin_file);
         $this->plugin_file = $plugin_file;
         $this->adminPanel = new AdminPanel();
-        $this->api = new Api();
         $this->updater = new Updater($plugin_file);
         $this->assets = new Assets($this->plugin_path, $plugin_file);
+        new ElementorWidgets();
 
         if ($this->getSelectedDivision()) {
             $this->router = new Router([
@@ -46,15 +47,6 @@ class Plugin
 
         add_action('admin_notices', [$this, 'showActivationAdminNotice']);
         register_activation_hook($plugin_file, [$this, 'handleActivation']);
-    }
-
-    public static function instance()
-    {
-        if (is_null(self::$_instance)) {
-            self::$_instance = new self();
-        }
-
-        return self::$_instance;
     }
 
     public function getSelectedDivision()
@@ -156,14 +148,5 @@ class Plugin
 
         require_once $template_path;
 
-    }
-
-    public function getApiInstance()
-    {
-        if (empty($this->api)) {
-            $this->api = new Api();
-        }
-
-        return $this->api;
     }
 }

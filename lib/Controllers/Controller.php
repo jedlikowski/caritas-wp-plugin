@@ -13,8 +13,7 @@ class Controller
 
     public function __construct()
     {
-        $plugin = Plugin::instance();
-        $this->api = $plugin->getApiInstance();
+        $this->api = Api::instance();
     }
 
     public function index()

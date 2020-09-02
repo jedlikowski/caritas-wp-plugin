@@ -2,6 +2,7 @@
 
 namespace IndicoPlus\CaritasApp\Core;
 
+use IndicoPlus\CaritasApp\Core\Api;
 use IndicoPlus\CaritasApp\Core\Plugin;
 use IndicoPlus\CaritasApp\Models\Target;
 use IndicoPlus\CaritasApp\Models\TargetPaymentMethods;
@@ -12,7 +13,7 @@ class DataFetcher
     public static function getTargetsList()
     {
         $plugin = Plugin::instance();
-        $api = static::getApiInstance();
+        $api = Api::instance();
 
         $res = $api->get('/targets', [
             'division_id' => $plugin->getSelectedDivision(),
@@ -26,7 +27,7 @@ class DataFetcher
 
     public static function getTarget(int $id)
     {
-        $api = static::getApiInstance();
+        $api = Api::instance();
         if (!is_numeric($id)) {
             return null;
         }
@@ -55,7 +56,7 @@ class DataFetcher
             $query[$param] = $additional[$param];
         }
 
-        $api = static::getApiInstance();
+        $api = Api::instance();
         $res = $api->get('/targets/' . $targetId . '/payment-methods', $query);
         if (!empty($res)) {
             $returnValue->TargetPaymentMethods = new TargetPaymentMethods($res);
@@ -69,11 +70,5 @@ class DataFetcher
         }
 
         return $returnValue;
-    }
-
-    protected static function getApiInstance()
-    {
-        $plugin = Plugin::instance();
-        return $plugin->getApiInstance();
     }
 }

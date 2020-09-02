@@ -1,8 +1,12 @@
 <?php
 namespace IndicoPlus\CaritasApp\Core;
 
+use IndicoPlus\CaritasApp\Traits\Singleton;
+
 class Api
 {
+    use Singleton;
+
     const BASE_PATH = 'https://aplikacjacaritas.pl';
 
     public function get(string $path = '', array $query = [])
