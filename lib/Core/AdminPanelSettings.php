@@ -7,9 +7,11 @@ use IndicoPlus\CaritasApp\Models\DivisionsList;
 
 class AdminPanelSettings
 {
+    private $settings = [];
     public function __construct()
     {
         add_action('admin_init', [$this, 'initSettingsPage']);
+        $this->settings = get_option('caritas_app_settings') ?: [];
     }
 
     public function initSettingsPage()
@@ -83,7 +85,7 @@ class AdminPanelSettings
 
     public function renderNewsEnableField()
     {
-        $options = get_option('caritas_app_settings');
+        $options = $this->settings;
         ?>
 <select name='caritas_app_settings[enable_news_view]'>
   <option value='1' <?php selected($options['enable_news_view'], 1);?>>Tak</option>
@@ -94,7 +96,7 @@ class AdminPanelSettings
 
     public function renderTargetsEnableField()
     {
-        $options = get_option('caritas_app_settings');
+        $options = $this->settings;
         ?>
 <select name='caritas_app_settings[enable_targets_view]'>
   <option value='1' <?php selected($options['enable_targets_view'], 1);?>>Tak</option>
@@ -105,7 +107,7 @@ class AdminPanelSettings
 
     public function renderCustomPriceField()
     {
-        $options = get_option('caritas_app_settings');
+        $options = $this->settings;
         $is_selected = empty($options['enable_custom_price']) ? 0 : $options['enable_custom_price'];
         ?>
 <select name='caritas_app_settings[enable_custom_price]'>
@@ -117,16 +119,13 @@ class AdminPanelSettings
 
     public function renderCustomPriceImageField()
     {
-        $options = get_option('caritas_app_settings');
-        $default_src = site_url("image.jpg");
+        global $caritas_app_plugin;
+        $options = $this->settings;
+        $default_src = plugin_dir_url($caritas_app_plugin->plugin_file) . 'img/inna-kwota.jpg';
         $url = empty($options['custom_price_image']) ? $default_src : $options['custom_price_image'];
         ?>
 
 <div class="caritas-app-media-input">
-  <p>
-    W przypadku braku wybranego obrazka wtyczka będzie próbowała użyć pliku
-    <code><?php echo $default_src; ?></code>
-  </p>
   <img data-action="upload" src="<?php echo $url; ?>" data-default-src="<?php echo $default_src; ?>"
     style="cursor: pointer; margin-top: 7px; max-width: 300px; max-height: 300px; display: block;"
     alt="Plik nie istnieje" />
@@ -141,6 +140,10 @@ class AdminPanelSettings
       Usuń obraz
     </button>
     <?php }?>
+    <p>
+      W przypadku braku wybranego obrazka wtyczka będzie próbowała użyć pliku
+      <code><?php echo $default_src; ?></code>
+    </p>
   </div>
 </div>
 <?php

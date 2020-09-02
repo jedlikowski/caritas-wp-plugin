@@ -11,6 +11,7 @@ use IndicoPlus\CaritasApp\Core\Updater;
 class Plugin
 {
     public $plugin_path;
+    public $plugin_file;
     private $activationTransientName = 'caritas-app-activation-notice-transient';
     public $selectedDivision = null;
     public $targetsViewEnabled = false;
@@ -28,6 +29,7 @@ class Plugin
         $this->loadSettings();
 
         $this->plugin_path = plugin_dir_path($plugin_file);
+        $this->plugin_file = $plugin_file;
         $this->adminPanel = new AdminPanel();
         $this->api = new Api();
         $this->updater = new Updater($plugin_file);
