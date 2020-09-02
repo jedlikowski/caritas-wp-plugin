@@ -3,7 +3,7 @@
  * Single Target template
  */
 ?>
-<?php global $caritas_app_plugin;?>
+<?php $caritas_app_plugin = \IndicoPlus\CaritasApp\Core\Plugin::instance();?>
 <?php get_header();?>
 <div class="caritas-app-container">
   <article class="caritas-app-target-single">

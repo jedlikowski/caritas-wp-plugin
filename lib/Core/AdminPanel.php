@@ -3,6 +3,7 @@
 namespace IndicoPlus\CaritasApp\Core;
 
 use IndicoPlus\CaritasApp\Core\AdminPanelSettings;
+use IndicoPlus\CaritasApp\Core\Plugin;
 
 class AdminPanel
 {
@@ -57,12 +58,12 @@ class AdminPanel
 
     public function renderSettingsPage()
     {
-        global $caritas_app_plugin;
+        $plugin = Plugin::instance();
 
         return $this->renderTemplate('settings', [
-            'targets_view_enabled' => $caritas_app_plugin->isTargetsViewEnabled(),
-            'news_view_enabled' => $caritas_app_plugin->isNewsViewEnabled(),
-            'selected_division' => $caritas_app_plugin->getSelectedDivision(),
+            'targets_view_enabled' => $plugin->isTargetsViewEnabled(),
+            'news_view_enabled' => $plugin->isNewsViewEnabled(),
+            'selected_division' => $plugin->getSelectedDivision(),
         ]);
 
     }
@@ -74,7 +75,7 @@ class AdminPanel
 
     private function renderTemplate(string $template = null, array $variables = [])
     {
-        global $caritas_app_plugin;
+        $plugin = Plugin::instance();
 
         // Define any data variables which will be used by the template
         foreach ($variables as $variable => $value) {
@@ -82,7 +83,7 @@ class AdminPanel
         }
 
         // get path to basic template from the plugin directory
-        $template_path = $caritas_app_plugin->plugin_path . 'templates-admin/' . $template . '.php';
+        $template_path = $plugin->plugin_path . 'templates-admin/' . $template . '.php';
 
         if (!file_exists($template_path)) {
             wp_die('Caritas App plugin is missing admin <strong>' . $template . '.php</strong> template!');

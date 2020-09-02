@@ -8,6 +8,7 @@ Author URI: https://indicoplus.pl
 Text Domain: caritas-app
 Version: 1.4.1
  */
+use \IndicoPlus\CaritasApp\Core\Plugin;
 defined('ABSPATH') or die('No script kiddies please!');
 
 global $wp_version;
@@ -23,7 +24,4 @@ if (version_compare(PHP_VERSION, "7.1", "<")) {
 require_once 'vendor/autoload.php';
 require_once 'functions.php';
 
-global $caritas_app_plugin;
-$caritas_app_plugin = new \IndicoPlus\CaritasApp\Core\Plugin(__FILE__);
-
-register_activation_hook(__FILE__, [$caritas_app_plugin, 'handleActivation']);
+Plugin::instance();

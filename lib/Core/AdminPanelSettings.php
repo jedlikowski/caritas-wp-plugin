@@ -3,6 +3,7 @@
 namespace IndicoPlus\CaritasApp\Core;
 
 use IndicoPlus\CaritasApp\Core\Api;
+use IndicoPlus\CaritasApp\Core\Plugin;
 use IndicoPlus\CaritasApp\Models\DivisionsList;
 
 class AdminPanelSettings
@@ -69,8 +70,8 @@ class AdminPanelSettings
 
     public function renderDivisionsField()
     {
-        global $caritas_app_plugin;
-        $value = $caritas_app_plugin->getSelectedDivision();
+        $plugin = Plugin::instance();
+        $value = $plugin->getSelectedDivision();
         $divisions = $this->getDivisions();
         $isDefaultSelected = selected($value, false, false);
 
@@ -119,9 +120,9 @@ class AdminPanelSettings
 
     public function renderCustomPriceImageField()
     {
-        global $caritas_app_plugin;
+        $plugin = Plugin::instance();
         $options = $this->settings;
-        $default_src = plugin_dir_url($caritas_app_plugin->plugin_file) . 'img/inna-kwota.jpg';
+        $default_src = plugin_dir_url($plugin->plugin_file) . 'img/inna-kwota.jpg';
         $url = empty($options['custom_price_image']) ? $default_src : $options['custom_price_image'];
         ?>
 
@@ -141,8 +142,9 @@ class AdminPanelSettings
     </button>
     <?php }?>
     <p>
-      W przypadku braku wybranego obrazka wtyczka będzie próbowała użyć pliku
-      <code><?php echo $default_src; ?></code>
+      W przypadku braku wybranego obrazka wtyczka będzie używać <a href="<?php echo $default_src; ?>" target="_blank"
+        rel="noopener">tego</a>
+      pliku.
     </p>
   </div>
 </div>

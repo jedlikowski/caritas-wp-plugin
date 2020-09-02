@@ -2,6 +2,7 @@
 
 namespace IndicoPlus\CaritasApp\Models;
 
+use IndicoPlus\CaritasApp\Core\Plugin;
 use IndicoPlus\CaritasApp\Models\DetailedTarget;
 use IndicoPlus\CaritasApp\Models\Photo;
 
@@ -43,8 +44,8 @@ class Target
 
     public function getCustomPricePhotoUrl()
     {
-        global $caritas_app_plugin;
-        return $caritas_app_plugin->customPriceImage;
+        $plugin = Plugin::instance();
+        return $plugin->customPriceImage;
 
     }
 

@@ -24,10 +24,12 @@ class Plugin
     private $updater = null;
     private $assets = null;
 
-    public function __construct(string $plugin_file)
+    private static $_instance = null;
+
+    public function __construct()
     {
         $this->loadSettings();
-
+        $plugin_file = dirname(dirname(dirname(__FILE__))) . '/indico-caritas-app.php';
         $this->plugin_path = plugin_dir_path($plugin_file);
         $this->plugin_file = $plugin_file;
         $this->adminPanel = new AdminPanel();
@@ -43,6 +45,16 @@ class Plugin
         }
 
         add_action('admin_notices', [$this, 'showActivationAdminNotice']);
+        register_activation_hook($plugin_file, [$this, 'handleActivation']);
+    }
+
+    public static function instance()
+    {
+        if (is_null(self::$_instance)) {
+            self::$_instance = new self();
+        }
+
+        return self::$_instance;
     }
 
     public function getSelectedDivision()

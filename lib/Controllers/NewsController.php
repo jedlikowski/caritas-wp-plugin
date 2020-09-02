@@ -3,6 +3,7 @@
 namespace IndicoPlus\CaritasApp\Controllers;
 
 use IndicoPlus\CaritasApp\Controllers\Controller;
+use IndicoPlus\CaritasApp\Core\Plugin;
 use IndicoPlus\CaritasApp\Core\Router;
 use IndicoPlus\CaritasApp\Models\News;
 use IndicoPlus\CaritasApp\Models\NewsList;
@@ -13,7 +14,7 @@ class NewsController extends Controller
 
     public function index()
     {
-        global $caritas_app_plugin;
+        $plugin = Plugin::instance();
         $query = [
             'page' => 1,
         ];
@@ -21,7 +22,7 @@ class NewsController extends Controller
             $query['page'] = $_GET['page'];
         }
         $NewsList = new NewsList();
-        $division = $caritas_app_plugin->getSelectedDivision();
+        $division = $plugin->getSelectedDivision();
         if (!$division) {
             return $this->renderTemplate('news', [
                 'NewsList' => $NewsList,

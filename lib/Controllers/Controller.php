@@ -3,6 +3,7 @@
 namespace IndicoPlus\CaritasApp\Controllers;
 
 use IndicoPlus\CaritasApp\Core\Api;
+use IndicoPlus\CaritasApp\Core\Plugin;
 
 class Controller
 {
@@ -12,8 +13,8 @@ class Controller
 
     public function __construct()
     {
-        global $caritas_app_plugin;
-        $this->api = $caritas_app_plugin->getApiInstance();
+        $plugin = Plugin::instance();
+        $this->api = $plugin->getApiInstance();
     }
 
     public function index()
@@ -49,8 +50,8 @@ class Controller
 
     public function renderTemplate(string $template = null, array $variables = [])
     {
-        global $caritas_app_plugin;
+        $plugin = Plugin::instance();
 
-        return $caritas_app_plugin->renderTemplate($template, $variables);
+        return $plugin->renderTemplate($template, $variables);
     }
 }
