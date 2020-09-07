@@ -12,6 +12,7 @@ class Target
     public $name = '';
     public $description = '';
     public $gallery = [];
+    public $detailedTargets = [];
     public $payments = 0;
     public $target_amount = 0;
     public $collected_amount = 0;

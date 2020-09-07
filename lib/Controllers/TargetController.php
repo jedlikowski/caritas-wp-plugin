@@ -21,7 +21,7 @@ class TargetController extends Controller
         $id = $this->cleanPath($path);
         $Target = caritas_app_get_target($id);
 
-        if (!$Target) {
+        if (!$Target || !$Target->id) {
             $this->abort();
         }
 

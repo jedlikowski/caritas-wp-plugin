@@ -10,7 +10,7 @@ use IndicoPlus\CaritasApp\Models\TargetsList;
 
 class DataFetcher
 {
-    public static function getTargetsList()
+    public static function getTargetsList(): TargetsList
     {
         $plugin = Plugin::instance();
         $api = Api::instance();
@@ -25,16 +25,16 @@ class DataFetcher
         return new TargetsList($res);
     }
 
-    public static function getTarget(int $id)
+    public static function getTarget(int $id): Target
     {
         $api = Api::instance();
         if (!is_numeric($id)) {
-            return null;
+            return new Target;
         }
 
         $res = $api->get('/targets/' . $id);
         if (empty($res)) {
-            return null;
+            return new Target;
         }
 
         return new Target($res);

@@ -8,11 +8,16 @@ class Api
     use Singleton;
 
     const BASE_PATH = 'https://aplikacjacaritas.pl';
+    private $cache = [];
 
     public function get(string $path = '', array $query = [])
     {
-        $path = $this->getUrl($path);
-        $url = $path . '?' . http_build_query($query);
+        if (!empty($this->cache[$path])) {
+            return $this->cache[$path];
+        }
+
+        $url = $this->getUrl($path);
+        $url = $url . '?' . http_build_query($query);
 
         $handle = curl_init($url);
         curl_setopt_array($handle, [
@@ -33,6 +38,7 @@ class Api
             return null;
         }
 
+        $this->cache[$path] = $json;
         return $json;
     }
 
