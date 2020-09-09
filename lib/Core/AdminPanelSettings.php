@@ -4,6 +4,7 @@ namespace IndicoPlus\CaritasApp\Core;
 
 use IndicoPlus\CaritasApp\Core\Api;
 use IndicoPlus\CaritasApp\Core\Plugin;
+use IndicoPlus\CaritasApp\Core\Router;
 use IndicoPlus\CaritasApp\Models\DivisionsList;
 
 class AdminPanelSettings
@@ -22,14 +23,14 @@ class AdminPanelSettings
 
         add_settings_section(
             'caritas_app_settings_page_section',
-            __('Settings', 'caritas-app'),
+            __('', 'caritas-app'),
             '__return_null',
             'caritas_app_settings_page'
         );
 
         add_settings_field(
             'selected_division',
-            __('Z której Caritas powinniśmy wyświetlać dane?', 'caritas-app'),
+            __('Źródło danych', 'caritas-app'),
             [$this, 'renderDivisionsField'],
             'caritas_app_settings_page',
             'caritas_app_settings_page_section'
@@ -37,7 +38,7 @@ class AdminPanelSettings
 
         add_settings_field(
             'enable_targets_view',
-            __('Moduł celów/zbiórek jest aktywny', 'caritas-app'),
+            __('Widok celów/zbiórek', 'caritas-app'),
             [$this, 'renderTargetsEnableField'],
             'caritas_app_settings_page',
             'caritas_app_settings_page_section'
@@ -45,15 +46,23 @@ class AdminPanelSettings
 
         add_settings_field(
             'enable_news_view',
-            __('Moduł aktualności jest aktywny', 'caritas-app'),
+            __('Widok aktualności', 'caritas-app'),
             [$this, 'renderNewsEnableField'],
             'caritas_app_settings_page',
             'caritas_app_settings_page_section'
         );
 
         add_settings_field(
+            'enable_payments_module',
+            __('Moduł płatności', 'caritas-app'),
+            [$this, 'renderPaymentsEnableField'],
+            'caritas_app_settings_page',
+            'caritas_app_settings_page_section'
+        );
+
+        add_settings_field(
             'enable_custom_price',
-            __('Pokaż opcję "Własna kwota" w proponowanych wpłatach', 'caritas-app'),
+            __('"Własna kwota"', 'caritas-app'),
             [$this, 'renderCustomPriceField'],
             'caritas_app_settings_page',
             'caritas_app_settings_page_section'
@@ -73,38 +82,81 @@ class AdminPanelSettings
         $plugin = Plugin::instance();
         $value = $plugin->getSelectedDivision();
         $divisions = $this->getDivisions();
-        $isDefaultSelected = selected($value, false, false);
 
+        $isNoneSelected = selected($value, false, false);
+        if ($value && !array_search($value, array_column((array) $divisions, 'id'))) {
+            $isNoneSelected = 'selected="selected"';
+        }
+
+        echo "<h4 style='padding: 0; margin: 0 0 10px;'>Wybierz oddział Caritas z listy</h4>";
         echo "<select id='caritas_app_settings[selected_division]' name='caritas_app_settings[selected_division]'>";
-        echo "<option value='0' {$isDefaultSelected} disabled>Nie wybrano</option>";
+        echo "<option value='0' {$isNoneSelected} disabled>Nie wybrano</option>";
         foreach ($divisions as $division) {
             $divisionSelected = selected($value, $division->id, false);
             echo "<option value='{$division->id}' {$divisionSelected}>{$division->name}</option>";
         }
         echo "</select>";
+        echo '<div style="margin-bottom: 20px"></div>';
+        echo "<h4 style='padding: 0; margin: 0 0 10px;'>Lub wprowadź ID ręcznie (zaawansowani użytkownicy)</h4>";
+        $textInputValue = $value ?: "";
+        echo "<input type='number' value='{$textInputValue}' name='caritas_app_settings[selected_division_manual]' />";
     }
 
     public function renderNewsEnableField()
     {
-        $options = $this->settings;
+        $plugin = Plugin::instance();
+        $value = intval($plugin->isNewsViewEnabled());
         ?>
 <select name='caritas_app_settings[enable_news_view]'>
-  <option value='1' <?php selected($options['enable_news_view'], 1);?>>Tak</option>
-  <option value='0' <?php selected($options['enable_news_view'], 0);?>>Nie</option>
+  <option value='1' <?php selected($value, 1);?>>Włączony</option>
+  <option value='0' <?php selected($value, 0);?>>Wyłączony</option>
 </select>
 <?php
-}
+
+        $url = home_url(Router::NEWS_PATH);
+        $this->renderHelpText("Włącza moduł aktualności pod adresami:");
+        $this->renderHelpText("$url - lista aktualności");
+        $this->renderHelpText("$url/{id} - pojedynczy artykuł");
+    }
 
     public function renderTargetsEnableField()
     {
-        $options = $this->settings;
+        $plugin = Plugin::instance();
+        $value = intval($plugin->isTargetsViewEnabled());
         ?>
 <select name='caritas_app_settings[enable_targets_view]'>
-  <option value='1' <?php selected($options['enable_targets_view'], 1);?>>Tak</option>
-  <option value='0' <?php selected($options['enable_targets_view'], 0);?>>Nie</option>
+  <option value='1' <?php selected($value, 1);?>>Włączony</option>
+  <option value='0' <?php selected($value, 0);?>>Wyłączony</option>
 </select>
 <?php
-}
+
+        $url = home_url(Router::TARGETS_PATH);
+        $this->renderHelpText("Włącza moduł celów/zbiórek pod adresami:");
+        $this->renderHelpText("$url - lista celów");
+        $this->renderHelpText("$url/{id} - pojedynczy cel");
+    }
+
+    public function renderPaymentsEnableField()
+    {
+        $plugin = Plugin::instance();
+        $value = intval($plugin->isPaymentsModuleEnabled());
+        ?>
+<select name='caritas_app_settings[enable_payments_module]'>
+  <option value='1' <?php selected($value, 1);?>>Włączony</option>
+  <option value='0' <?php selected($value, 0);?>>Wyłączony</option>
+</select>
+<?php
+
+        $targets_url = home_url(Router::TARGETS_PATH);
+        $execute_payment_url = home_url(Router::BANK_TRANSFER_PATH);
+        $payment_success_url = home_url(Router::PAYMENT_SUCCESS_PATH);
+        $payment_error_url = home_url(Router::PAYMENT_ERROR_PATH);
+        $this->renderHelpText("Włącza moduł płatności pod adresami:");
+        $this->renderHelpText("$targets_url/{id}/wesprzyj - formularz wsparcia celu/zbiórki");
+        $this->renderHelpText("$payment_success_url - widok sukcesu płatności");
+        $this->renderHelpText("$payment_error_url - widok nieudanej płatności");
+        $this->renderHelpText("$execute_payment_url - przekierowanie do dostawcy płatności");
+    }
 
     public function renderCustomPriceField()
     {
@@ -112,11 +164,13 @@ class AdminPanelSettings
         $is_selected = empty($options['enable_custom_price']) ? 0 : $options['enable_custom_price'];
         ?>
 <select name='caritas_app_settings[enable_custom_price]'>
-  <option value='1' <?php selected($is_selected, 1);?>>Tak</option>
-  <option value='0' <?php selected($is_selected, 0);?>>Nie</option>
+  <option value='1' <?php selected($is_selected, 1);?>>Pokaż</option>
+  <option value='0' <?php selected($is_selected, 0);?>>Ukryj</option>
 </select>
 <?php
-}
+
+        $this->renderHelpText("Włącza kafelek 'Własna kwota' jako jedna z proponowanych wpłat.");
+    }
 
     public function renderCustomPriceImageField()
     {
@@ -150,6 +204,11 @@ class AdminPanelSettings
 </div>
 <?php
 }
+
+    public function renderHelpText(string $text)
+    {
+        echo '<p>' . $text . '</p>';
+    }
 
     private function getDivisions()
     {

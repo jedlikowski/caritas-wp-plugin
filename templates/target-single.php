@@ -67,7 +67,7 @@
         </li>
         <?php }?>
 
-        <?php if ($caritas_app_plugin->customPriceEnabled) {?>
+        <?php if ($caritas_app_plugin->isCustomPriceEnabled()) {?>
         <li class="caritas-app-card-item">
           <a href="<?php echo $Target->getPaymentFormUrl() ?>">
             <div class="caritas-app-card">

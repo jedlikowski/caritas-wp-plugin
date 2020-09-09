@@ -46,7 +46,7 @@ class Target
     public function getCustomPricePhotoUrl()
     {
         $plugin = Plugin::instance();
-        return $plugin->customPriceImage;
+        return $plugin->getCustomPricePhotoUrl();
 
     }
 

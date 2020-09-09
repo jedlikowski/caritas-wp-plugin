@@ -19,16 +19,19 @@ class Router
         $options = wp_parse_args($options, [
             'targets_enabled' => true,
             'news_enabled' => true,
+            'payments_enabled' => true,
         ]);
 
         $routes = [];
-        if ($options['targets_enabled']) {
+        if ($options['payments_enabled']) {
             $routes[static::TARGETS_PATH . '/*/wesprzyj'] = TargetController::class . "@paymentMethods";
-            $routes[static::TARGETS_PATH . '/*'] = TargetController::class . "@show";
-            $routes[static::TARGETS_PATH] = TargetController::class . "@index";
             $routes[static::BANK_TRANSFER_PATH] = PaymentController::class . "@processBankTransfer";
             $routes[static::PAYMENT_SUCCESS_PATH] = PaymentController::class . "@paymentSuccess";
             $routes[static::PAYMENT_ERROR_PATH] = PaymentController::class . "@paymentError";
+        }
+        if ($options['targets_enabled']) {
+            $routes[static::TARGETS_PATH . '/*'] = TargetController::class . "@show";
+            $routes[static::TARGETS_PATH] = TargetController::class . "@index";
         }
 
         if ($options['news_enabled']) {

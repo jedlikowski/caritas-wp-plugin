@@ -42,6 +42,7 @@ class Plugin
             $this->router = new Router([
                 'targets_enabled' => $this->isTargetsViewEnabled(),
                 'news_enabled' => $this->isNewsViewEnabled(),
+                'payments_enabled' => $this->isPaymentsModuleEnabled(),
             ]);
         }
 
@@ -62,6 +63,21 @@ class Plugin
     public function isNewsViewEnabled()
     {
         return $this->newsViewEnabled ? true : false;
+    }
+
+    public function isPaymentsModuleEnabled()
+    {
+        return $this->isPaymentsModuleEnabled ? true : false;
+    }
+
+    public function isCustomPriceEnabled()
+    {
+        return $this->customPriceEnabled ? true : false;
+    }
+
+    public function getCustomPricePhotoUrl()
+    {
+        return $this->customPriceImage ?: "";
     }
 
     public function handleActivation()
@@ -102,6 +118,10 @@ class Plugin
             $this->selectedDivision = null;
         }
 
+        if (!empty($options['selected_division_manual']) && is_numeric($options['selected_division_manual'])) {
+            $this->selectedDivision = intval($options['selected_division_manual']);
+        }
+
         if (isset($options['enable_targets_view']) && is_numeric($options['enable_targets_view'])) {
             $this->targetsViewEnabled = (bool) intval($options['enable_targets_view']);
         } else {
@@ -112,6 +132,12 @@ class Plugin
             $this->newsViewEnabled = (bool) intval($options['enable_news_view']);
         } else {
             $this->newsViewEnabled = false;
+        }
+
+        if (isset($options['enable_payments_module']) && is_numeric($options['enable_payments_module'])) {
+            $this->isPaymentsModuleEnabled = (bool) intval($options['enable_payments_module']);
+        } else {
+            $this->isPaymentsModuleEnabled = true;
         }
 
         if (isset($options['enable_custom_price']) && is_numeric($options['enable_custom_price'])) {
