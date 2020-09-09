@@ -1,3 +1,10 @@
+# 1.4.2
+
+- Dodanie możliwości wyłączenia modułu płatności
+- Dodanie możliwości ręcznego wpisania ID oddziału (dla zaawansowanych użytkowników)
+- Aktualizacja zależności
+- Czytelniejszy panel ustawień
+
 # 1.4.1
 
 - Dodanie możliwości wyboru obrazka widocznego na kafelku "własna kwota".
