@@ -4,3 +4,5 @@ dist
 release
 *.zip
 mix-manifest.json
+.DS_Store
+releases/*
