@@ -1,7 +1,7 @@
 {
   "name": "indicoplus/caritas-wp-plugin",
   "type": "project",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "minimum-stability": "dev",
   "description": "",
   "config": {
@@ -10,7 +10,6 @@
   "require": {
     "php": ">=7.1",
     "yahnis-elsts/plugin-update-checker": "^4.9",
-    "tightenco/collect": "dev-master",
     "jedlikowski/wordpress-router": "dev-master"
   },
   "autoload": {
