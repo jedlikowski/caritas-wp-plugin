@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02d0d7eebb05999d38ec9edd945f3e48",
+    "content-hash": "45aadced19402eccbdaa18bed98d297b",
     "packages": [
         {
             "name": "jedlikowski/wordpress-router",
@@ -91,7 +91,7 @@
     "stability-flags": {
         "jedlikowski/wordpress-router": 20
     },
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=7.1"

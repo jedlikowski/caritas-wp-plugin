@@ -1,8 +1,9 @@
 {
   "name": "indicoplus/caritas-wp-plugin",
-  "type": "project",
-  "version": "1.4.4",
+  "type": "wordpress-plugin",
+  "version": "1.4.5",
   "minimum-stability": "dev",
+  "prefer-stable": true,
   "description": "",
   "config": {
     "preferred-install": "dist"
@@ -16,16 +17,5 @@
     "psr-4": {
       "IndicoPlus\\CaritasApp\\": "lib/"
     }
-  },
-  "scripts": {
-    "prepare-release": [
-      "rm -rf release",
-      "zip -r -X release.zip . -x \"*.git*\" -x \"node_modules*\" -x \"src*\" -x \"*.DS_Store\" -x \"*release/*\" ",
-      "mkdir release",
-      "unzip release.zip -d ./release/caritas-wp-plugin",
-      "rm release.zip",
-      "cd release && zip -r -X \"caritas-wp-plugin-$(jq \".version\" ../composer.json | tr -d '\"').zip\" ./caritas-wp-plugin -x \"*.git*\" -x \"*.DS_Store\" ",
-      "cd release && rm -rf caritas-wp-plugin"
-    ]
   }
 }
