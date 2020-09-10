@@ -1,6 +1,6 @@
 {
   "name": "caritas-wp-plugin",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "Ta wtyczka dodaje funkcjonalności Aplikacji Caritas do strony internetowej.",
   "main": "index.js",
   "repository": "git@github.com:jedlikowski/caritas-wp-plugin.git",
