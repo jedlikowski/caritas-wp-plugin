@@ -10,7 +10,7 @@
     <ul class="caritas-app-cards">
       <?php foreach ($TargetsList->targets as $item) {?>
       <li class="caritas-app-card-item">
-        <a href="<?php echo site_url('/cele/' . $item->id); ?>" title="<?php echo $item->name; ?>">
+        <a href="<?php echo home_url('/cele/' . $item->id); ?>" title="<?php echo $item->name; ?>">
           <div class="caritas-app-card">
             <?php if ($item->photo) {?>
             <div class="caritas-app-card-image" style="background-image: url('<?php echo $item->photo->url; ?>');">
@@ -22,7 +22,7 @@
                 <?php echo apply_filters('the_content', $item->summary); ?>
               </div>
               <div class="caritas-app-btn-container">
-                <a href="<?php echo site_url('/cele/' . $item->id); ?>" title="<?php echo $item->name; ?>">
+                <a href="<?php echo home_url('/cele/' . $item->id); ?>" title="<?php echo $item->name; ?>">
                   <button class="caritas-app-btn caritas-app-card-btn">Wspieram</button>
                 </a>
               </div>

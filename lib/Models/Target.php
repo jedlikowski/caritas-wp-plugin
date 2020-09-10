@@ -52,7 +52,7 @@ class Target
 
     public function getPaymentFormUrl(int $detailedTargetId = null, int $price = null)
     {
-        return site_url('/cele/' . $this->id . '/wesprzyj?' . http_build_query([
+        return home_url('/cele/' . $this->id . '/wesprzyj?' . http_build_query([
             'detailed_target_id' => $detailedTargetId,
             'price' => $price,
         ]));

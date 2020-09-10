@@ -10,7 +10,7 @@
     <?php foreach ($NewsList->data as $article) {?>
       <article class="caritas-app-news-list-article">
         <h2>
-          <a href="<?php echo site_url('/aktualnosci/' . $article->id); ?>" title="<?php echo $article->title; ?>">
+          <a href="<?php echo home_url('/aktualnosci/' . $article->id); ?>" title="<?php echo $article->title; ?>">
             <?php echo $article->title; ?>
           </a>
         </h2>

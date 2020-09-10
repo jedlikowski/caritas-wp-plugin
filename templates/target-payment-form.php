@@ -6,14 +6,14 @@
 <?php get_header();?>
 
 <div class="caritas-app-container">
-    
+
     <div class="caritas-app-target-payment-methods">
         <span>Wybrany cel:</span>
         <h1><?php echo $TargetPaymentMethods->target; ?></h1>
         <?php if (!empty($TargetPaymentMethods->detailed_target)) {?>
         <h2><?php echo $TargetPaymentMethods->detailed_target; ?></h2>
         <?php }?>
-        <form action="<?php echo site_url('/bank-transfer-payment'); ?>" method="POST">
+        <form action="<?php echo home_url('/bank-transfer-payment'); ?>" method="POST">
             <input
                    type="hidden"
                    name="payment_url"

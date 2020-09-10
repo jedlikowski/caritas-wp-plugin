@@ -14,16 +14,16 @@
       Wtyczka definiuje następujące linki oraz szablony odpowiadające za ich wyświetlanie:
     </p>
     <ul>
-      <li><code><?php echo site_url('/aktualnosci'); ?></code> - <code>news.php</code> (lista artykułów)</li>
-      <li><code><?php echo site_url('/aktualnosci/{id}'); ?></code> - <code>news-single.php</code> (szczegóły artykułu)
+      <li><code><?php echo home_url('/aktualnosci'); ?></code> - <code>news.php</code> (lista artykułów)</li>
+      <li><code><?php echo home_url('/aktualnosci/{id}'); ?></code> - <code>news-single.php</code> (szczegóły artykułu)
       </li>
-      <li><code><?php echo site_url('/cele'); ?></code> - <code>targets.php</code> (lista celów)</li>
-      <li><code><?php echo site_url('/cele/{id}'); ?></code> - <code>target-single.php</code> (szczegóły celu)</li>
-      <li><code><?php echo site_url('/cele/{id}/wesprzyj'); ?></code> - <code>target-payment-form.php</code> (formularz
+      <li><code><?php echo home_url('/cele'); ?></code> - <code>targets.php</code> (lista celów)</li>
+      <li><code><?php echo home_url('/cele/{id}'); ?></code> - <code>target-single.php</code> (szczegóły celu)</li>
+      <li><code><?php echo home_url('/cele/{id}/wesprzyj'); ?></code> - <code>target-payment-form.php</code> (formularz
         płatności)</li>
-      <li><code><?php echo site_url('/platnosc-zakonczona'); ?></code> - <code>payment-success.php</code> (sukces
+      <li><code><?php echo home_url('/platnosc-zakonczona'); ?></code> - <code>payment-success.php</code> (sukces
         płatności)</li>
-      <li><code><?php echo site_url('/blad-platnosci'); ?></code> - <code>payment-error.php</code> (błąd płatności)
+      <li><code><?php echo home_url('/blad-platnosci'); ?></code> - <code>payment-error.php</code> (błąd płatności)
       </li>
     </ul>
     <h2>Dostępne funkcje:</h2>

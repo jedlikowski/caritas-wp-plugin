@@ -13,8 +13,8 @@ class PaymentController extends Controller
             'price' => 0,
             'name' => '',
             'email' => '',
-            'success_url' => site_url(Router::PAYMENT_SUCCESS_PATH),
-            'error_url' => site_url(Router::PAYMENT_ERROR_PATH),
+            'success_url' => home_url(Router::PAYMENT_SUCCESS_PATH),
+            'error_url' => home_url(Router::PAYMENT_ERROR_PATH),
         ];
 
         $data['price'] = empty($_POST['price']) ? $data['price'] : caritas_app_parse_formatted_price($_POST['price']);
